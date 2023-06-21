@@ -25,7 +25,7 @@ Header.propTypes = {
 };
 //Prop Defaults
 Header.defaultProps = {
-  title: "My Todos",
+  title: "Weather Travel App",
 };
 
 export default Header;
