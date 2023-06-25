@@ -8,95 +8,50 @@ import AddTasks from "./components/AddTasks";
 import Tasks from "./components/Tasks";
 
 function App() {
-  //states
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    const getTasks = async () => {
-      const taskData = await fetchTasks();
-      setTasks(taskData);
-    };
-    getTasks();
+    const taskData = getTasksFromLocalStorage();
+    setTasks(taskData);
   }, []);
 
-  //Fetch Tasks
-  const fetchTasks = async () => {
-    const res = await fetch("http://localhost:5000/tasks");
-    const data = await res.json();
-
-    return data;
+  const getTasksFromLocalStorage = () => {
+    const tasksData = localStorage.getItem("tasks");
+    return tasksData ? JSON.parse(tasksData) : [];
   };
 
-  //Fetch Task
-  const fetchTask = async (id) => {
-    const res = await fetch(`http://localhost:5000/tasks/${id}`);
-    const data = await res.json();
-
-    return data;
+  const saveTasksToLocalStorage = (tasksData) => {
+    localStorage.setItem("tasks", JSON.stringify(tasksData));
   };
 
-  //Add Task
-  const addTask = async (title, date, reminder) => {
-    // const rndNumber = Math.floor(Math.random() * 10000) + 1;
+  const addTask = (title, date, reminder) => {
     const newTask = {
       title: title,
       date: date,
       reminder: reminder,
     };
 
-    //do POST request
-    const postTask = async () => {
-      await fetch("http://localhost:5000/tasks", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(newTask),
-      });
-
-      //updates local state after post
-      const data = await fetchTasks();
-      setTasks(data);
-    };
-    postTask();
-
-    // setTasks([...tasks, newTask]);
-
-    console.log("addTask func", newTask);
+    const updatedTasks = [...tasks, newTask];
+    setTasks(updatedTasks);
+    saveTasksToLocalStorage(updatedTasks);
   };
 
-  //Delete Task
-  const deleteTask = async (id) => {
-    await fetch(`http://localhost:5000/tasks/${id}`, {
-      method: "DELETE",
-    });
-
-    //set state with new data
-    const data = await fetchTasks();
-    setTasks(data);
-    // console.log("delete task", id)
-    // setTasks(tasks.filter((task) => task.id !== id));
+  const deleteTask = (id) => {
+    const updatedTasks = tasks.filter((task) => task.id !== id);
+    setTasks(updatedTasks);
+    saveTasksToLocalStorage(updatedTasks);
   };
 
-  //Toggle Reminder on Task - highlight if true
-  const toggleReminder = async (id) => {
-    //
-    let updTask = await fetchTask(id);
-    updTask = { ...updTask, reminder: !updTask.reminder };
-    //PUT upd reminder task
-    await fetch(`http://localhost:5000/tasks/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(updTask),
+  const toggleReminder = (id) => {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === id) {
+        return { ...task, reminder: !task.reminder };
+      }
+      return task;
     });
-
-    //set state with new data
-    const data = await fetchTasks();
-    setTasks(data);
-    // console.log("toggle reminder on", id)
+    setTasks(updatedTasks);
+    saveTasksToLocalStorage(updatedTasks);
   };
 
   return (
@@ -112,7 +67,7 @@ function App() {
             element={
               <>
                 {showAddTask && <AddTasks addTask={addTask} />}
-                {tasks <= 0 ? (
+                {tasks.length <= 0 ? (
                   <p style={{ color: "steelblue" }}>
                     No more tasks left, maybe add some!
                   </p>
