@@ -7,7 +7,7 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
       onDoubleClick={() => toggleReminder(task.id)}
     >
       <h3>
-        {task.title}
+        {task.address}
         <TiDelete
           style={{ color: "red" }}
           onClick={() => deleteTask(task.id)}
