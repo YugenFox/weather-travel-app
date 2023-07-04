@@ -6,6 +6,8 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 import AddTasks from "./components/AddTasks";
 import Tasks from "./components/Tasks";
+//uuid ensures a unique ID, used in addTask implementing uuidv4 function
+import { v4 as uuidv4 } from 'uuid'; 
 
 function App() {
   const [showAddTask, setShowAddTask] = useState(false);
@@ -27,6 +29,7 @@ function App() {
 
   const addTask = (title, date, reminder) => {
     const newTask = {
+      id: uuidv4(),
       title: title,
       date: date,
       reminder: reminder,
@@ -78,6 +81,7 @@ function App() {
                     toggleReminder={toggleReminder}
                   />
                 )}
+                
               </>
             }
           />

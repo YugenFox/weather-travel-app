@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const AddTasks = ({ addTask }) => {
   const [formData, setFormData] = useState({
-    title: "",
+    address: "",
     date: "",
     reminder: false,
   });
@@ -25,22 +25,22 @@ const AddTasks = ({ addTask }) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    //check if they filled out title
-    if (formData.title.trim() === "") {
-      alert("Fill out the title to add a task");
+    //check if they filled out address
+    if (formData.address.trim() === "") {
+      alert("Fill out the address to add a task");
       setFormData({
         ...formData,
-        title: "",
+        address: "",
       });
       return;
     }
 
     //addTask
-    addTask(formData.title, formData.date, formData.reminder);
+    addTask(formData.address, formData.date, formData.reminder);
 
     //set form state data back to blank after addTask complete
     setFormData({
-      title: "",
+      address: "",
       date: "",
       reminder: false,
     });
@@ -49,13 +49,13 @@ const AddTasks = ({ addTask }) => {
   return (
     <form className="add-form" onSubmit={onSubmit}>
       <div className="form-control">
-        <label>Task Title</label>
+        <label>Address Name</label>
         <input
           type="text"
-          placeholder="boi add a task description!"
-          value={formData.title}
+          placeholder="Input address for next adventure"
+          value={formData.address}
           onChange={handleInputChange}
-          name="title"
+          name="address"
         />
       </div>
       <div className="form-control">
@@ -83,7 +83,7 @@ const AddTasks = ({ addTask }) => {
       <input
         className="btn btn-block"
         type="submit"
-        value="Submit Task"
+        value="Submit Location"
       ></input>
     </form>
   );
