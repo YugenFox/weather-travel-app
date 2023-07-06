@@ -27,12 +27,13 @@ function App() {
     localStorage.setItem("tasks", JSON.stringify(tasksData));
   };
 
-  const addTask = (address, date, reminder) => {
+  const addTask = (address, date, reminder, geoCoordinates) => {
     const newTask = {
       id: uuidv4(),
       address: address,
       date: date,
       reminder: reminder,
+      geoCoordinates: geoCoordinates,
     };
 
     const updatedTasks = [...tasks, newTask];

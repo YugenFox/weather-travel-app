@@ -22,7 +22,7 @@ const AddTasks = ({ addTask }) => {
     });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     //check if they filled out address
@@ -35,8 +35,33 @@ const AddTasks = ({ addTask }) => {
       return;
     }
 
+    //set geoCoordinates for addTask (Forward geocode - address to coordinates)
+    let geoCoordinates = {}; //used in addTask
+    const opencage = require("opencage-api-client");
+
+    // note that the library takes care of URI encoding
+    try {
+      const data = await opencage.geocode({ q: formData.address, key: process.env.REACT_APP_OPENCAGE_API_KEY });
+      if (data.status.code === 200 && data.results.length > 0) {
+        const place = data.results[0];
+        console.log(place.formatted);
+        console.log(place.geometry);
+        geoCoordinates = place.geometry;
+        console.log(place.annotations.timezone.name);
+      } else {
+        console.log("Status", data.status.message);
+        console.log("total_results", data.total_results);
+      }
+    } catch (error) {
+      console.log("Error", error.message);
+      if (error.status.code === 402) {
+        console.log("hit free trial daily limit");
+        console.log("become a customer: https://opencagedata.com/pricing");
+      }
+    }
+
     //addTask
-    addTask(formData.address, formData.date, formData.reminder);
+    addTask(formData.address, formData.date, formData.reminder, geoCoordinates);
 
     //set form state data back to blank after addTask complete
     setFormData({
