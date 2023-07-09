@@ -26,6 +26,7 @@ const AddTasks = ({ addTask }) => {
     e.preventDefault();
 
     //check if they filled out address
+    //add check if its a valid address if opencage returns just Status OK instead of place
     if (formData.address.trim() === "") {
       alert("Fill out the address to add a task");
       setFormData({
@@ -41,16 +42,28 @@ const AddTasks = ({ addTask }) => {
 
     // note that the library takes care of URI encoding
     try {
-      const data = await opencage.geocode({ q: formData.address, key: process.env.REACT_APP_OPENCAGE_API_KEY });
+      const data = await opencage.geocode({
+        q: formData.address,
+        key: process.env.REACT_APP_OPENCAGE_API_KEY,
+      });
       if (data.status.code === 200 && data.results.length > 0) {
         const place = data.results[0];
         console.log(place.formatted);
         console.log(place.geometry);
-        geoCoordinates = place.geometry;
+        geoCoordinates = place.geometry; // e.g{lat: 33.2588817, lng: -86.8295337}
         console.log(place.annotations.timezone.name);
       } else {
         console.log("Status", data.status.message);
         console.log("total_results", data.total_results);
+        //clears address form item if invalid address entered
+        if (data.total_results === 0) {
+          alert(`${data.total_results} results found, enter a valid address`);
+          setFormData({
+            ...formData,
+            address: "",
+          });
+          return;
+        }
       }
     } catch (error) {
       console.log("Error", error.message);
@@ -60,8 +73,29 @@ const AddTasks = ({ addTask }) => {
       }
     }
 
+    //get weather data from open-meteo.com - no api key required - 10,000 limit requests per day
+    let weatherData = {}; //will be used in addTask and task component for rendering weather data
+    const weatherAPI = `https://api.open-meteo.com/v1/forecast?latitude=${geoCoordinates.lat}&longitude=${geoCoordinates.lng}&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_probability_max&windspeed_unit=mph&precipitation_unit=inch&timezone=auto&forecast_days=1`;
+    try {
+      const response = await fetch(weatherAPI);
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      const data = await response.json();
+      weatherData = data;
+      console.log('weatherData: ', JSON.stringify(weatherData))
+    } catch (error) {
+      console.error(error);
+    }
+
     //addTask
-    addTask(formData.address, formData.date, formData.reminder, geoCoordinates);
+    addTask(
+      formData.address,
+      formData.date,
+      formData.reminder,
+      geoCoordinates,
+      weatherData
+    );
 
     //set form state data back to blank after addTask complete
     setFormData({
