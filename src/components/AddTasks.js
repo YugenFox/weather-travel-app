@@ -83,7 +83,7 @@ const AddTasks = ({ addTask }) => {
       }
       const data = await response.json();
       weatherData = data;
-      console.log('weatherData: ', JSON.stringify(weatherData))
+      console.log('weatherData: ', weatherData)
     } catch (error) {
       console.error(error);
     }
