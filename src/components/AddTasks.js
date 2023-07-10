@@ -86,6 +86,13 @@ const AddTasks = ({ addTask }) => {
       return;
     }
 
+    //check if Date Range - Arrival - Leaving have been set. 
+    //will use how far away from today's date the startDate and endDate are for looping through the amount of needed days in the weather data object when rendering tasks
+    if(!formData.startDate || !formData.endDate){
+      alert("Select both an Arrival and Leaving date in Date Range")
+      return
+    }
+
     //set geoCoordinates for addTask (Forward geocode - address to coordinates)
     let geoCoordinates = {}; //used in addTask
     const opencage = require("opencage-api-client");
@@ -125,9 +132,8 @@ const AddTasks = ({ addTask }) => {
 
     //get weather data from open-meteo.com - no api key required - 10,000 limit requests per day
     let weatherData = {}; //will be used in addTask and task component for rendering weather data
-    //need start and end days added
-    //right now is for only 1 day span
-    const weatherAPI = `https://api.open-meteo.com/v1/forecast?latitude=${geoCoordinates.lat}&longitude=${geoCoordinates.lng}&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_probability_max&windspeed_unit=mph&precipitation_unit=inch&timezone=auto&forecast_days=1`;
+    //right now is for the max of weather api 16 day span
+    const weatherAPI = `https://api.open-meteo.com/v1/forecast?latitude=${geoCoordinates.lat}&longitude=${geoCoordinates.lng}&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_probability_max&windspeed_unit=mph&precipitation_unit=inch&timezone=auto&forecast_days=16`;
     try {
       const response = await fetch(weatherAPI);
       if (!response.ok) {
