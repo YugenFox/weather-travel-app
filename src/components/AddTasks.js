@@ -143,10 +143,13 @@ const AddTasks = ({ addTask }) => {
     //addTask
     addTask(
       formData.address,
-      formData.date,
       formData.reminder,
       geoCoordinates,
-      weatherData
+      weatherData,
+      formData.startDate,
+      formData.endDate,
+      formData.startDateIndex,
+      formData.endDateIndex
     );
 
     //set form state data back to blank after addTask complete

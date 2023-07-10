@@ -7,7 +7,7 @@ import About from "./components/About";
 import AddTasks from "./components/AddTasks";
 import Tasks from "./components/Tasks";
 //uuid ensures a unique ID, used in addTask implementing uuidv4 function
-import { v4 as uuidv4 } from 'uuid'; 
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [showAddTask, setShowAddTask] = useState(false);
@@ -27,13 +27,26 @@ function App() {
     localStorage.setItem("tasks", JSON.stringify(tasksData));
   };
 
-  const addTask = (address, date, reminder, geoCoordinates) => {
+  const addTask = (
+    address,
+    reminder,
+    geoCoordinates,
+    weatherData,
+    startDate,
+    endDate,
+    startDateIndex,
+    endDateIndex
+  ) => {
     const newTask = {
       id: uuidv4(),
       address: address,
-      date: date,
       reminder: reminder,
       geoCoordinates: geoCoordinates,
+      weatherData: weatherData,
+      startDate: startDate,
+      endDate: endDate,
+      startDateIndex: startDateIndex,
+      endDateIndex: endDateIndex,
     };
 
     const updatedTasks = [...tasks, newTask];
@@ -82,7 +95,6 @@ function App() {
                     toggleReminder={toggleReminder}
                   />
                 )}
-                
               </>
             }
           />
