@@ -1,11 +1,61 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const AddTasks = ({ addTask }) => {
   const [formData, setFormData] = useState({
     address: "",
-    date: "",
+    startDate: null,
+    endDate: null,
+    startDateIndex: null,
+    endDateIndex: null,
     reminder: false,
   });
+
+  const today = new Date();
+  //weather api only goes 16 days in the future
+  //will use start date and end date to loop through only the parts of the next 16 days of data the user selects
+  const minDate = today;
+  const maxDate = new Date();
+  maxDate.setDate(today.getDate() + 16);
+
+  //logs the date range
+  useEffect(() => {
+    console.log(
+      "dateRange",
+      `Start: ${formData.startDate} - End: ${formData.endDate}  STARTINDEX: ${formData.startDateIndex} - ENDINDEX: ${formData.endDateIndex}`
+    );
+  }, [formData.startDate, formData.endDate]);
+
+  const handleDateChange = (update) => {
+    const today = new Date();
+    const startDate = update[0];
+    const endDate = update[1];
+
+    if (startDate && endDate) {
+      const startDay = startDate.getDate();
+      const endDay = endDate.getDate();
+      const daysFromTodayToStart = startDay - today.getDate();
+      const daysFromTodayToEnd = endDay - today.getDate();
+      //using 0 as fallback incase the date is negative or before today somehow
+      const startDateIndex = Math.max(daysFromTodayToStart, 0);
+      const endDateIndex = Math.max(daysFromTodayToEnd, 0);
+
+      setFormData({
+        ...formData,
+        startDate: update[0],
+        endDate: update[1],
+        startDateIndex: startDateIndex,
+        endDateIndex: endDateIndex,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        startDate: update[0],
+        endDate: update[1],
+      });
+    }
+  };
 
   const handleInputChange = (event) => {
     // another way to do much of below
@@ -75,6 +125,8 @@ const AddTasks = ({ addTask }) => {
 
     //get weather data from open-meteo.com - no api key required - 10,000 limit requests per day
     let weatherData = {}; //will be used in addTask and task component for rendering weather data
+    //need start and end days added
+    //right now is for only 1 day span
     const weatherAPI = `https://api.open-meteo.com/v1/forecast?latitude=${geoCoordinates.lat}&longitude=${geoCoordinates.lng}&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_probability_max&windspeed_unit=mph&precipitation_unit=inch&timezone=auto&forecast_days=1`;
     try {
       const response = await fetch(weatherAPI);
@@ -83,7 +135,7 @@ const AddTasks = ({ addTask }) => {
       }
       const data = await response.json();
       weatherData = data;
-      console.log('weatherData: ', weatherData)
+      console.log("weatherData: ", weatherData);
     } catch (error) {
       console.error(error);
     }
@@ -117,7 +169,7 @@ const AddTasks = ({ addTask }) => {
           name="address"
         />
       </div>
-      <div className="form-control">
+      {/* <div className="form-control">
         <label>Task Date</label>
         <input
           type="text"
@@ -125,6 +177,19 @@ const AddTasks = ({ addTask }) => {
           value={formData.date}
           onChange={handleInputChange}
           name="date"
+        />
+      </div> */}
+      <div className="form-control">
+        <label>Date Range</label>
+        <DatePicker
+          selectsRange={true}
+          startDate={formData.startDate}
+          endDate={formData.endDate}
+          onChange={handleDateChange}
+          isClearable={true}
+          minDate={minDate}
+          maxDate={maxDate}
+          placeholderText="Arrival - Leaving date"
         />
       </div>
       <div className="form-control-check">
