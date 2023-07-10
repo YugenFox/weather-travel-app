@@ -17,7 +17,7 @@ const AddTasks = ({ addTask }) => {
   //will use start date and end date to loop through only the parts of the next 16 days of data the user selects
   const minDate = today;
   const maxDate = new Date();
-  maxDate.setDate(today.getDate() + 16);
+  maxDate.setDate(today.getDate() + 15);
 
   //logs the date range
   useEffect(() => {
@@ -133,7 +133,7 @@ const AddTasks = ({ addTask }) => {
     //get weather data from open-meteo.com - no api key required - 10,000 limit requests per day
     let weatherData = {}; //will be used in addTask and task component for rendering weather data
     //right now is for the max of weather api 16 day span
-    const weatherAPI = `https://api.open-meteo.com/v1/forecast?latitude=${geoCoordinates.lat}&longitude=${geoCoordinates.lng}&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_probability_max&windspeed_unit=mph&precipitation_unit=inch&timezone=auto&forecast_days=16`;
+    const weatherAPI = `https://api.open-meteo.com/v1/forecast?latitude=${geoCoordinates.lat}&longitude=${geoCoordinates.lng}&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_probability_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=auto&forecast_days=16`;
     try {
       const response = await fetch(weatherAPI);
       if (!response.ok) {
