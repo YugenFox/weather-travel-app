@@ -2,7 +2,7 @@ import Task from './Task'
 
 const Tasks = ({tasks, deleteTask, toggleReminder}) => {
   return (
-    <div>
+    <div className="hollidayContainer">
       {tasks.map((task)=>(
         <Task 
         key={task.id}

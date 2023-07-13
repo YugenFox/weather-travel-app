@@ -11,12 +11,12 @@ body {
 }
 
 .container {
-  max-width: 500px;
-  margin: 30px auto;
+  max-width: 100%;
+  margin: 0 auto;
   overflow: auto;
   min-height: 300px;
   border: 1px solid steelblue;
-  padding: 30px;
+  padding: 0;
   border-radius: 5px;
 }
 
@@ -109,4 +109,49 @@ body {
 footer {
   margin-top: 30px;
   text-align: center;
+}
+
+.hollidayContainer{
+
+}
+
+.locationCard{
+  display: flex;
+  overflow-x: auto;
+  width: 100%;
+  padding-bottom: 16px;
+}
+
+.dayItem{
+  background: cornflowerblue;
+    border-radius: 3px;
+    margin-right: min(20px, 3vw);
+    display: flex;
+    flex-direction: column;
+}
+
+.dayReport{
+  display: table;
+  width: max-content;
+}
+
+.dayRow{
+  display: table-row;
+}
+
+.dayColFull{
+  display: table-cell;
+}
+
+.dayColHalf{
+  display: table-cell;
+  padding-right: 30px;
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    max-width: 69%;
+    margin: 30px auto;
+    padding: 30px;
+  }
 }
