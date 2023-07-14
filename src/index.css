@@ -117,7 +117,7 @@ footer {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  background: blue;
+  /* background: blue; */
 
   overflow-x: auto;
 }
