@@ -110,3 +110,28 @@ footer {
   margin-top: 30px;
   text-align: center;
 }
+
+/* Weather task classes */
+.locationCard{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background: blue;
+
+  overflow-x: auto;
+}
+
+.dayCard{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 3px solid thistle;
+  border-radius: 2rem;
+  min-width: 160px;
+
+  padding: 2rem .5rem;
+  margin: 1rem .5rem;
+}

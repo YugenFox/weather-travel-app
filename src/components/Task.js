@@ -16,50 +16,26 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
         />
       </h3>
 
-      <div>
-        <h4>Weather Data</h4>
+      <div className="locationCard">
         {/* loop through the weather data temperature min/max starting at task.startDateIndex ending at task.endDateIndex have to + 1 since .slice does not keep the last parameter in the return just the one before it*/}
 
         {task.weatherData.daily.time
           .slice(task.startDateIndex, task.endDateIndex + 1)
           .map((time, index) => (
-            <div key={index}>
+            <div className="dayCard" key={index}>
               <p>
                 <b>Date: {time.slice(5, 10)}</b>
               </p>
               <p>
-                Precipitation Probability Max:{" "}
+              {/* Max Temp */}
                 {
-                  task.weatherData.daily.precipitation_probability_max.slice(
+                  task.weatherData.daily.temperature_2m_max.slice(
                     task.startDateIndex,
                     task.endDateIndex + 1
                   )[index]
-                }{""}
-                {
-                  task.weatherData.daily_units
-                    .precipitation_probability_max
-                }
-              </p>
-              <p>
-                Sunrise:{" "}
-                {
-                  task.weatherData.daily.sunrise.slice(
-                    task.startDateIndex,
-                    task.endDateIndex + 1
-                  )[index].slice(-5)
-                }
-              </p>
-              <p>
-                Sunset:{" "}
-                {
-                  task.weatherData.daily.sunset.slice(
-                    task.startDateIndex,
-                    task.endDateIndex + 1
-                  )[index].slice(-5)
-                }
-              </p>
-              <p>
-                Temperature 2m Min:{" "}
+                }{" / "}
+
+                {/* Min Temp */}
                 {
                   task.weatherData.daily.temperature_2m_min.slice(
                     task.startDateIndex,
@@ -72,18 +48,37 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
                 }
               </p>
               <p>
-                Temperature 2m Max:{" "}
+                %precip:{" "}
                 {
-                  task.weatherData.daily.temperature_2m_max.slice(
+                  task.weatherData.daily.precipitation_probability_max.slice(
                     task.startDateIndex,
                     task.endDateIndex + 1
                   )[index]
-                }{" "}
+                }{""}
                 {
                   task.weatherData.daily_units
-                    .temperature_2m_max
+                    .precipitation_probability_max
                 }
               </p>
+              <p>
+                {/* Sunrise:{" "} */}
+                 
+                {
+                  task.weatherData.daily.sunrise.slice(
+                    task.startDateIndex,
+                    task.endDateIndex + 1
+                  )[index].slice(-5)
+                }{" "}
+                {/* Sunset:{" "} */}
+                
+                {
+                  task.weatherData.daily.sunset.slice(
+                    task.startDateIndex,
+                    task.endDateIndex + 1
+                  )[index].slice(-5)
+                }
+              </p>
+             
             </div>
           ))}
       </div>
