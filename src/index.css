@@ -11,7 +11,7 @@ body {
 }
 
 .container {
-  max-width: 500px;
+  max-width: 700px;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
@@ -112,6 +112,7 @@ footer {
 }
 
 /* Weather task classes */
+/* used when slider not active, such as when the dayCardElements.length does not meet the minimum slidesToShow in sliderSettings */
 .locationCard{
   display: flex;
   flex-direction: row;
@@ -120,6 +121,8 @@ footer {
   /* background: blue; */
 
   overflow-x: auto;
+  max-width: 600px;
+  width: 100%;
 }
 
 .dayCard{
@@ -131,7 +134,40 @@ footer {
   border: 3px solid thistle;
   border-radius: 2rem;
   min-width: 160px;
+  max-width: 160px;
+  height: 200px;
 
   padding: 2rem .5rem;
   margin: 1rem .5rem;
+}
+
+.dayCard_Temp{
+  display: flex;
+  flex-direction: row;
+}
+.dayCard_Temp-maxTemp{
+  font-size: 1.25rem;
+    font-weight: 700;
+}
+.dayCard_Temp-minTemp{
+  font-size: .875rem;
+}
+
+.scrollButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.scrollButton {
+  padding: 5px 10px;
+  background-color: #f4f4f4;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.test{
+  width: 500px;
+  height: 500px;
 }
