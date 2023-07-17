@@ -60,14 +60,8 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
-  };
-// delete
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
+    margin: 0,
+  padding: 0,
   };
 
   const dayCardElements = task.weatherData.daily.time
@@ -105,9 +99,9 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
 
   if (dayCardElements.length > 3) {
     console.log(dayCardElements, dayCardElements.length)
-    sliderComponent = <Slider {...sliderSettings} className="locationCard-Slider-On">{dayCardElements}</Slider>;
+    sliderComponent = <Slider {...sliderSettings} >{dayCardElements}</Slider>;
   } else {
-    sliderComponent = <div className="locationCard-Slider-Off">{dayCardElements}</div>;
+    sliderComponent = <div className="locationCard">{dayCardElements}</div>;
   }
 
   return (

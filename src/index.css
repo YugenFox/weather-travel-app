@@ -113,7 +113,7 @@ footer {
 
 /* Weather task classes */
 /* used when slider not active, such as when the dayCardElements.length does not meet the minimum slidesToShow in sliderSettings */
-.locationCard-Slider-Off {
+.locationCard {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -124,12 +124,9 @@ footer {
   max-width: 600px;
   width: 100%;
 }
-.locationCard-Slider-On {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  /* background: blue; */
+
+.locationCard > .dayCard{
+  margin-right: 1.75rem;
 }
 
 .dayCard {
