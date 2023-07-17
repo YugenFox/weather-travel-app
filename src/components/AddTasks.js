@@ -17,7 +17,7 @@ const AddTasks = ({ addTask }) => {
   //will use start date and end date to loop through only the parts of the next 16 days of data the user selects
   const minDate = today;
   const maxDate = new Date();
-  maxDate.setDate(today.getDate() + 15);
+  maxDate.setDate(today.getDate() + 14);
 
   //logs the date range
   useEffect(() => {
