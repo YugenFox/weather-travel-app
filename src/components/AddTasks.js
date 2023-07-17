@@ -15,6 +15,7 @@ const AddTasks = ({ addTask }) => {
   const today = new Date();
   //weather api only goes 16 days in the future
   //will use start date and end date to loop through only the parts of the next 16 days of data the user selects
+  //made 15 days since there was a bug with the last 16th day always being equal to the current day
   const minDate = today;
   const maxDate = new Date();
   maxDate.setDate(today.getDate() + 14);
