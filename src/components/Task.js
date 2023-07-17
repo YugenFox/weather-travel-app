@@ -105,9 +105,9 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
 
   if (dayCardElements.length > 3) {
     console.log(dayCardElements, dayCardElements.length)
-    sliderComponent = <Slider {...sliderSettings}>{dayCardElements}</Slider>;
+    sliderComponent = <Slider {...sliderSettings} className="locationCard-Slider-On">{dayCardElements}</Slider>;
   } else {
-    sliderComponent = <div className="locationCard">{dayCardElements}</div>;
+    sliderComponent = <div className="locationCard-Slider-Off">{dayCardElements}</div>;
   }
 
   return (

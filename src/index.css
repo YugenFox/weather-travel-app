@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
 
 * {
   box-sizing: border-box;
@@ -7,7 +7,7 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .container {
@@ -113,7 +113,7 @@ footer {
 
 /* Weather task classes */
 /* used when slider not active, such as when the dayCardElements.length does not meet the minimum slidesToShow in sliderSettings */
-.locationCard{
+.locationCard-Slider-Off {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -124,8 +124,15 @@ footer {
   max-width: 600px;
   width: 100%;
 }
+.locationCard-Slider-On {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  /* background: blue; */
+}
 
-.dayCard{
+.dayCard {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -137,20 +144,23 @@ footer {
   max-width: 160px;
   height: 200px;
 
-  padding: 2rem .5rem;
-  margin: 1rem .5rem;
+  padding: 2rem 0.5rem;
+  margin: 1rem 0.5rem;
 }
 
-.dayCard_Temp{
+.dayCard_Temp {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
-.dayCard_Temp-maxTemp{
+.dayCard_Temp-maxTemp {
   font-size: 1.25rem;
-    font-weight: 700;
+  font-weight: 700;
 }
-.dayCard_Temp-minTemp{
-  font-size: .875rem;
+.dayCard_Temp-minTemp {
+  font-size: 0.875rem;
 }
 
 .scrollButtons {
@@ -167,7 +177,7 @@ footer {
   cursor: pointer;
 }
 
-.test{
+.test {
   width: 500px;
   height: 500px;
 }
