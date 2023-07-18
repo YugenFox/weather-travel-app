@@ -12,8 +12,8 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
     const [hour, minute] = timeString.slice(0, 5).split(":");
     const formattedHour = (hour % 12 || 12).toString();
     const period = hour >= 12 ? "PM" : "AM";
-    // return `${formattedHour}:${minute}` + `${period}`;
-    return `5:3232`;
+    return `${formattedHour}:${minute}` + `${period}`;
+    // return `5:3232`;
     //cuts off the return on screen to last 5 characters for some reason, Don't use
   };
 
@@ -61,7 +61,34 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
     slidesToShow: 3,
     slidesToScroll: 1,
     margin: 0,
-  padding: 0,
+    padding: 0,
+    draggable: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 450,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
   };
 
   const dayCardElements = task.weatherData.daily.time
@@ -89,8 +116,8 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
         </p>
         <p>
           {/* Sunrise & Sunset Time */}
-          <LuSunrise /> {sunriseTimes[index].slice(-5) ||
-            "NA"} <LuSunset /> {sunsetTimes[index].slice(-5) || "NA"}
+          <LuSunrise /> {formatTime(sunriseTimes[index]) ||
+            "NA"} <LuSunset /> {formatTime(sunsetTimes[index]) || "NA"}
         </p>
       </div>
     ));
@@ -98,8 +125,8 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
   let sliderComponent;
 
   if (dayCardElements.length > 3) {
-    console.log(dayCardElements, dayCardElements.length)
-    sliderComponent = <Slider {...sliderSettings} >{dayCardElements}</Slider>;
+    console.log(dayCardElements, dayCardElements.length);
+    sliderComponent = <Slider {...sliderSettings}>{dayCardElements}</Slider>;
   } else {
     sliderComponent = <div className="locationCard">{dayCardElements}</div>;
   }
