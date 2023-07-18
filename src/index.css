@@ -12,7 +12,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 100vh;
+  height: 110vh;
 }
 
 .container {
@@ -60,10 +60,16 @@ body {
 }
 
 .task {
-  background: #f4f4f4;
+  background-color: rgba(244, 244, 244, 0.65);
+  border-radius: 2rem;
   margin: 5px;
   padding: 10px 20px;
   cursor: pointer;
+}
+
+.tasks{
+  max-height: 860px;
+  overflow-y: auto;
 }
 
 .task.reminder {
@@ -165,21 +171,4 @@ footer {
   font-size: 0.875rem;
 }
 
-.scrollButtons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
 
-.scrollButton {
-  padding: 5px 10px;
-  background-color: #f4f4f4;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.test {
-  width: 500px;
-  height: 500px;
-}

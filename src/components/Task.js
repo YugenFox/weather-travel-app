@@ -59,10 +59,19 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
     infinite: false,
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 1,
+    slidesToScroll: 3,
     margin: 0,
     padding: 0,
     draggable: false,
+    appendDots: dots => (
+      <div
+        style={{
+          bottom: "-4px"
+        }}
+      >
+        <ul style={{ margin: "0px" }}> {dots} </ul>
+      </div>
+    ),
     responsive: [
       {
         breakpoint: 1024,
