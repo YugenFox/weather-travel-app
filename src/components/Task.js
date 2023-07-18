@@ -69,8 +69,7 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
-          infinite: true,
-          dots: true
+          dots: true,
         }
       },
       {
