@@ -86,7 +86,7 @@ function App() {
               <>
                 {showAddTask && <AddTasks addTask={addTask} />}
                 {tasks.length <= 0 ? (
-                  <p style={{ color: "steelblue" }}>
+                  <p style={{ color: "white" }}>
                     No more travel locations left, maybe add some!
                   </p>
                 ) : (
