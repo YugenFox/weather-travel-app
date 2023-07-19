@@ -159,6 +159,7 @@ footer {
   margin-right: 1.75rem;
 }
 
+
 .dayCard {
   display: flex;
   flex-direction: column;
@@ -193,13 +194,27 @@ footer {
 
 }
 
-.cool-gradient {
-  background: linear-gradient(to right, #00bfff, #00d9ff, #00f3ff, #00fffd, #00fff4);
+.dayCard_SunTime{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: "Roboto Mono", monospace;
+
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+}
+
+.warm-gradient {
+  background: linear-gradient(to right, #ff8c00, #ff4f00, #ff0c00, #ff0017, #ff006e);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.warm-gradient {
-  background: linear-gradient(to right, #ff8c00, #ff4f00, #ff0c00, #ff0017, #ff006e);
+.cool-gradient {
+  background: linear-gradient(to right, #00bfff, #00d9ff, #00f3ff, #00fffd, #00fff4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

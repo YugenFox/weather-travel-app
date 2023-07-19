@@ -11,7 +11,7 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
     const [date, timeString] = time.split("T");
     const [hour, minute] = timeString.slice(0, 5).split(":");
     const formattedHour = (hour % 12 || 12).toString();
-    const period = hour >= 12 ? "PM" : "AM";
+    const period = hour >= 12 ? " PM" : " AM";
     return `${formattedHour}:${minute}` + `${period}`;
   };
 
@@ -114,11 +114,11 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
           <LuCloudRain /> {precipitationProbabilities[index]}
           {dailyUnitsPrecipitation}
         </p>
-        <div>
+        <div className="dayCard_SunTime">
           {/* Sunrise & Sunset Time */}
           <p className="sunrise-gradient">
             <LuSunrise /> {formatTime(sunriseTimes[index]) || "NA"}
-          </p>{" "}
+          </p>
           <p className="sunset-gradient">
             <LuSunset /> {formatTime(sunsetTimes[index]) || "NA"}
           </p>
