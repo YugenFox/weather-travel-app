@@ -10,7 +10,7 @@ import Tasks from "./components/Tasks";
 import { v4 as uuidv4 } from "uuid";
 
 function App() {
-  const [showAddTask, setShowAddTask] = useState(false);
+  const [showAddTask, setShowAddTask] = useState(true);
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
