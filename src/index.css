@@ -140,6 +140,16 @@ footer {
   text-decoration: underline;
 }
 
+.author{
+  /* font-weight: 600; */
+  color: #e55858;
+  font-weight: bold;
+  text-decoration: none;
+}
+.author:hover {
+  text-decoration: underline;
+}
+
 /* Weather task classes */
 /* used when slider not active, such as when the dayCardElements.length does not meet the minimum slidesToShow in sliderSettings */
 /* Location card not used when all dayCards have slider wrapping applied */
