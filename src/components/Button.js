@@ -14,7 +14,7 @@ const Button = ({ text, color, onAdd }) => {
 };
 
 Button.defaultProps = {
-  text: "Add Task",
+  text: "Add Location",
   color: "steelblue",
   onAdd: () => {
     console.log("Need to finish onAdd function in Button");

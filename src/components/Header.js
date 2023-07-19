@@ -10,7 +10,7 @@ const Header = ({ title, changeShowAddTask, showAddTask }) => {
       <h1>{title}</h1>
       {location.pathname === "/" && (
         <Button
-          text={showAddTask ? "Hide Add Task" : "Add Task"}
+          text={showAddTask ? "Hide Add Location Form" : "Show Add Location Form"}
           color={showAddTask ? "red" : "green"}
           onAdd={changeShowAddTask}
         />

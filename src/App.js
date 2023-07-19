@@ -87,7 +87,7 @@ function App() {
                 {showAddTask && <AddTasks addTask={addTask} />}
                 {tasks.length <= 0 ? (
                   <p style={{ color: "steelblue" }}>
-                    No more tasks left, maybe add some!
+                    No more travel locations left, maybe add some!
                   </p>
                 ) : (
                   <Tasks
