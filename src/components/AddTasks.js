@@ -202,7 +202,7 @@ const AddTasks = ({ addTask }) => {
           placeholderText="Arrival - Leaving date"
         />
       </div>
-      <div className="form-control-check">
+      {/* <div className="form-control-check">
         <label>Task Reminder</label>
         <input
           type="checkbox"
@@ -212,7 +212,7 @@ const AddTasks = ({ addTask }) => {
           onChange={handleInputChange}
           name="reminder"
         />
-      </div>
+      </div> */}
 
       <input
         className="btn btn-block"
