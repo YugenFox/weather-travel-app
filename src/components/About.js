@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const About = () => {
   return (
-    <div>
+    <div className="about">
       <ul>
         <li>Author: Kaleb Day</li>
         <li>Date: 1/24/2023</li>

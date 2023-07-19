@@ -128,6 +128,7 @@ footer {
 
 /* Weather task classes */
 /* used when slider not active, such as when the dayCardElements.length does not meet the minimum slidesToShow in sliderSettings */
+/* Location card not used when all dayCards have slider wrapping applied */
 .locationCard {
   display: flex;
   flex-direction: row;
@@ -168,11 +169,64 @@ footer {
   text-align: center;
 }
 .dayCard_Temp-maxTemp {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 700;
 }
 .dayCard_Temp-minTemp {
-  font-size: 0.875rem;
+  font-size: 1rem;
+  font-weight: 700;
+
 }
+
+.cool-gradient {
+  background: linear-gradient(to right, #00bfff, #00d9ff, #00f3ff, #00fffd, #00fff4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.warm-gradient {
+  background: linear-gradient(to right, #ff8c00, #ff4f00, #ff0c00, #ff0017, #ff006e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+
+/* About */
+.about {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.about ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.about li {
+  margin-bottom: 10px;
+}
+
+.about h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.about p {
+  color: #555;
+  line-height: 1.5;
+}
+
+.about a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.about a:hover {
+  text-decoration: underline;
+}
+
 
 

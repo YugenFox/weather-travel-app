@@ -52,10 +52,10 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
     margin: 0,
     padding: 0,
     draggable: false,
-    appendDots: dots => (
+    appendDots: (dots) => (
       <div
         style={{
-          bottom: "-4px"
+          bottom: "-4px",
         }}
       >
         <ul style={{ margin: "0px" }}> {dots} </ul>
@@ -68,27 +68,29 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
           slidesToShow: 3,
           slidesToScroll: 3,
           dots: true,
-        }
+        },
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          initialSlide: 2
-        }
+          initialSlide: 2,
+        },
       },
       {
         breakpoint: 450,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
-  {/* loop through the weather data temperature min/max starting at task.startDateIndex ending at task.endDateIndex have to + 1 since .slice does not keep the last parameter in the return just the one before it*/}
+  {
+    /* loop through the weather data temperature min/max starting at task.startDateIndex ending at task.endDateIndex have to + 1 since .slice does not keep the last parameter in the return just the one before it*/
+  }
   const dayCardElements = task.weatherData.daily.time
     .slice(startDateIndex, endDateIndex + 1)
     .map((time, index) => (
@@ -97,12 +99,12 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
           <b>Date: {time.slice(5, 10)}</b>
         </p>
         <div className="dayCard_Temp">
-          <p>
+          <p className="dayCard_Temp-maxTemp warm-gradient">
             {/* Max Temp */}
             {temperaturesMax[index] || "NA"}
           </p>{" "}
           / {""}
-          <p>
+          <p className="dayCard_Temp-minTemp cool-gradient">
             {/* Min Temp */}
             {temperaturesMin[index] || "NA"} {dailyUnitsTemperature || "NA"}
           </p>
@@ -112,11 +114,15 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
           <LuCloudRain /> {precipitationProbabilities[index]}
           {dailyUnitsPrecipitation}
         </p>
-        <p>
+        <div>
           {/* Sunrise & Sunset Time */}
-          <LuSunrise /> {formatTime(sunriseTimes[index]) ||
-            "NA"} <LuSunset /> {formatTime(sunsetTimes[index]) || "NA"}
-        </p>
+          <p className="sunrise-gradient">
+            <LuSunrise /> {formatTime(sunriseTimes[index]) || "NA"}
+          </p>{" "}
+          <p className="sunset-gradient">
+            <LuSunset /> {formatTime(sunsetTimes[index]) || "NA"}
+          </p>
+        </div>
       </div>
     ));
 
@@ -126,17 +132,13 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
   if (dayCardElements.length < 3) {
     sliderComponent = (
       // This marginLeft does not work or change things
-        //will just deal with < 3 being 2 or 1 element centered
+      //will just deal with < 3 being 2 or 1 element centered
       <Slider {...sliderSettings} style={{ marginLeft: "0px" }}>
         {dayCardElements}
       </Slider>
     );
   } else {
-    sliderComponent = (
-      <Slider {...sliderSettings}>
-        {dayCardElements}
-      </Slider>
-    );
+    sliderComponent = <Slider {...sliderSettings}>{dayCardElements}</Slider>;
   }
 
   // if (dayCardElements.length > 3) {
@@ -160,9 +162,7 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
           onClick={() => deleteTask(task.id)}
         />
       </h3>
-      <div>
-        {sliderComponent}
-      </div>
+      <div>{sliderComponent}</div>
     </div>
   );
 };
