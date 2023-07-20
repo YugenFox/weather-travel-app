@@ -111,7 +111,7 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
         </div>
         <p>
           {/* Max Precipitation Probability */}
-          <LuCloudRain /> {precipitationProbabilities[index]}
+          <LuCloudRain /> {precipitationProbabilities[index] || "NA"}
           {dailyUnitsPrecipitation}
         </p>
         <div className="dayCard_SunTime">
@@ -153,7 +153,7 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
   return (
     <div
       className={`task ${task.reminder ? "reminder" : ""}`}
-      onDoubleClick={() => toggleReminder(task.id)}
+      // onDoubleClick={() => toggleReminder(task.id)}
     >
       <h3>
         Location: {task.address}

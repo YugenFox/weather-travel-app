@@ -61,7 +61,8 @@ function App() {
   };
 
   const toggleReminder = (id) => {
-    //commented out Task Reminder in AddTasks which makes this work, without value .reminder to change or see nothing happens on double click
+    //commented out Task Reminder check form in AddTasks
+    //commented out onDoubleClick={() => toggleReminder(task.id)} in Task return div, would change reminder(green line) class from being applied depending on .reminder being true or false(default)
     const updatedTasks = tasks.map((task) => {
       if (task.id === id) {
         return { ...task, reminder: !task.reminder };

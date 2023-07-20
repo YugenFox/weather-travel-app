@@ -15,10 +15,10 @@ const AddTasks = ({ addTask }) => {
   const today = new Date();
   //weather api only goes 16 days in the future
   //will use start date and end date to loop through only the parts of the next 16 days of data the user selects
-  //made 15 days since there was a bug with the last 16th day always being equal to the current day
+  //+16 might be fine, but leaving as +15 as a little buffer
   const minDate = today;
   const maxDate = new Date();
-  maxDate.setDate(today.getDate() + 14);
+  maxDate.setDate(today.getDate() + 15);
 
   //logs the date range
   useEffect(() => {
@@ -34,11 +34,21 @@ const AddTasks = ({ addTask }) => {
     const endDate = update[1];
 
     if (startDate && endDate) {
-      const startDay = startDate.getDate();
-      const endDay = endDate.getDate();
-      const daysFromTodayToStart = startDay - today.getDate();
-      const daysFromTodayToEnd = endDay - today.getDate();
-      //using 0 as fallback incase the date is negative or before today somehow
+      // const startDay = startDate.getDate();
+      // const endDay = endDate.getDate();
+      // const daysFromTodayToStart = startDay - today.getDate();
+      // const daysFromTodayToEnd = endDay - today.getDate();
+      // //using 0 as fallback incase the date is negative or before today somehow
+      // const startDateIndex = Math.max(daysFromTodayToStart, 0);
+      // const endDateIndex = Math.max(daysFromTodayToEnd, 0);
+
+      const daysFromTodayToStart = Math.ceil(
+        (startDate - today) / (1000 * 60 * 60 * 24)
+      );
+      const daysFromTodayToEnd = Math.ceil(
+        (endDate - today) / (1000 * 60 * 60 * 24)
+      );
+
       const startDateIndex = Math.max(daysFromTodayToStart, 0);
       const endDateIndex = Math.max(daysFromTodayToEnd, 0);
 
@@ -87,11 +97,11 @@ const AddTasks = ({ addTask }) => {
       return;
     }
 
-    //check if Date Range - Arrival - Leaving have been set. 
+    //check if Date Range - Arrival - Leaving have been set.
     //will use how far away from today's date the startDate and endDate are for looping through the amount of needed days in the weather data object when rendering tasks
-    if(!formData.startDate || !formData.endDate){
-      alert("Select both an Arrival and Leaving date in Date Range")
-      return
+    if (!formData.startDate || !formData.endDate) {
+      alert("Select both an Arrival and Leaving date in Date Range");
+      return;
     }
 
     //set geoCoordinates for addTask (Forward geocode - address to coordinates)
