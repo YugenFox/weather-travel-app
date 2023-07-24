@@ -111,7 +111,7 @@ const Task = ({ task, deleteTask, toggleReminder }) => {
         </div>
         <p>
           {/* Max Precipitation Probability */}
-          <LuCloudRain /> {precipitationProbabilities[index] || "NA"}
+          <LuCloudRain /> {precipitationProbabilities[index] || "0"}
           {dailyUnitsPrecipitation}
         </p>
         <div className="dayCard_SunTime">
